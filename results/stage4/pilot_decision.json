@@ -1,0 +1,58 @@
+{
+ "german": {
+  "random": {
+   "best_primary_comparator": "nn_unk",
+   "crps_best": 0.8705901137698742,
+   "crps_samos_attn": 0.8738289815757693,
+   "diff": 0.003238867805895107,
+   "dm_p": 0.24014406818778555,
+   "bh_reject": false,
+   "boot_ci": [
+    -0.001293534692998186,
+    0.009210290428947443
+   ]
+  },
+  "spatial": {
+   "best_primary_comparator": "nn_unk",
+   "crps_best": 0.8922305166733415,
+   "crps_samos_attn": 0.8865233762431706,
+   "diff": -0.005707140430170954,
+   "dm_p": 0.09982251256898977,
+   "bh_reject": false,
+   "boot_ci": [
+    -0.012157876698354593,
+    0.0015736387448208548
+   ]
+  },
+  "promising_point_estimate_spatial": true,
+  "decision": "NO-GO"
+ },
+ "euppbench": {
+  "random": {
+   "best_primary_comparator": "nn_unk",
+   "crps_best": 0.9205114116870929,
+   "crps_samos_attn": 0.9363704797492438,
+   "diff": 0.01585906806215087,
+   "dm_p": 1.1399397092937136e-07,
+   "bh_reject": true,
+   "boot_ci": [
+    0.010133245490767887,
+    0.0226177360589754
+   ]
+  },
+  "spatial": {
+   "best_primary_comparator": "emos_bst_gl",
+   "crps_best": 0.9770018538934541,
+   "crps_samos_attn": 1.0218483602253734,
+   "diff": 0.044846506331919334,
+   "dm_p": 1.2497650248022296e-08,
+   "bh_reject": true,
+   "boot_ci": [
+    0.029581223307217207,
+    0.062108782648211604
+   ]
+  },
+  "promising_point_estimate_spatial": false,
+  "decision": "NO-GO"
+ }
+}

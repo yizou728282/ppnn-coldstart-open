@@ -1,0 +1,39 @@
+{
+  "name": "stage2_new_station",
+  "registered": "2026-09-26 (before any stage-2 model was trained or evaluated)",
+  "data": {"path": "data/data_RL18.feather", "drop_columns": ["sm_mean", "sm_var"], "md5": "18bb8d47b47692a2bda193572b0683ed"},
+  "years": {"fit": [2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014], "early_stopping": 2015, "test": 2016},
+  "folds": {
+    "primary": {"type": "random_station", "K": 7, "seed": 2026, "unit": "all 537 station ids"},
+    "secondary": {"type": "spatial_kmeans_latlon", "K": 7, "seed": 2026},
+    "rule": "held-out stations are removed from ALL years (fit, early stopping, normalization statistics, EMOS fitting); only their 2016 records are scored"
+  },
+  "station_attributes": ["lat", "lon", "alt", "orog", "alt_minus_orog"],
+  "methods": {
+    "raw_ensemble_gauss": "N(ens mean, ens sd)",
+    "emos_gl": "global EMOS, min-CRPS, fit on training stations 2007-2014",
+    "emos_bst_gl": "global boosted EMOS (Gaussian, log-link scale, ML, component-wise boosting on all 38 predictors, step 0.05, max 1000 iterations, AIC stopping), fit on training stations 2007-2014",
+    "nn_unk": "NN-aux-emb; unseen stations use reserved UNK embedding trained with 5% station dropout",
+    "nn_knn": "same trained networks as nn_unk; unseen-station embedding = inverse-distance-weighted mean of the k=5 nearest training stations' embeddings, distance sqrt(d_km^2 + (0.1 km/m * d_alt_m)^2)",
+    "nn_noemb": "no embedding; station attributes are inputs",
+    "nn_attr": "embedding = MLP(station attributes) -> 2-d, trained jointly, used for all stations",
+    "nn_hybrid": "PROPOSED. embedding = MLP(attributes) + free per-station offset delta_s; delta_s zeroed with probability 0.5 per sample during training; unseen stations use delta = 0",
+    "nn_hybrid_res": "EXPLORATORY secondary: nn_hybrid + residual mean (mu = ens_mean + f) + constrained spread sigma = sqrt(softplus(c)^2 + softplus(d)^2 s^2)",
+    "nn_hybrid_knn": "EXPLORATORY secondary: nn_hybrid with delta for unseen stations = kNN-IDW mean of training deltas (same k, distance as nn_knn)"
+  },
+  "nn_hyperparameters": {"hidden": 512, "emb_dim": 2, "attr_mlp_hidden": 32, "optimizer": "Adam", "lr": 0.002, "batch_size": 4096,
+                         "max_epochs": 30, "patience": 3, "early_stopping_on": "2015 records of training stations", "refit": "none (model at best 2015 epoch is used)",
+                         "seeds_primary": [0,1,2,3,4,5,6,7,8,9], "seeds_secondary_spatial": [0,1,2]},
+  "reference_seen_stations": {"emos_loc_bst": "per-station boosted EMOS fit on 2007-2015 excluding station-specific features, AIC stopping, tested on 2016 of all seen stations (stage-1 setting; compare with paper 0.80)"},
+  "metrics": {"primary": "mean Gaussian CRPS over all 2016 records of held-out stations, pooled over the 7 folds (each station held out exactly once)",
+              "secondary": ["CRPSS vs raw_ensemble_gauss", "CRPSS vs emos_gl", "MAE", "RMSE", "coverage of central 80% and 90% intervals", "PIT histogram (10 bins) and reliability index", "spread-skill: mean sigma vs RMSE"],
+              "reporting": "per method: (a) CRPS of the 10-seed ensemble (mean of mu and sigma over seeds) [primary], (b) mean +- sd over seeds of single-seed CRPS; per-fold CRPS; CRPS vs distance to nearest training station"},
+  "significance": {"primary_family": [["nn_hybrid","emos_gl"],["nn_hybrid","emos_bst_gl"],["nn_hybrid","nn_unk"],["nn_hybrid","nn_knn"],["nn_hybrid","nn_noemb"],["nn_hybrid","nn_attr"]],
+                   "test": "Diebold-Mariano on the 366 daily-mean CRPS differences (Newey-West lag 5), two-sided, seed-ensemble forecasts",
+                   "bootstrap": "moving-block bootstrap, block 7 days, 10000 reps, 95% CI of mean difference",
+                   "multiplicity": "Benjamini-Hochberg q=0.05 across the 6 primary comparisons",
+                   "station_level": "station-wise DM (lag 1) + BH q=0.05, fraction of held-out stations significantly better/worse",
+                   "secondary_comparisons": "all other pairs reported without claims"},
+  "decision_rules": ["The proposed method is claimed better than a competitor only if the BH-adjusted DM test is significant AND the bootstrap CI excludes 0 AND the sign agrees in the spatial-fold check.",
+                     "No hyperparameter or variant is selected using 2016 data. nn_hybrid_res and nn_hybrid_knn remain exploratory regardless of their results."]
+}

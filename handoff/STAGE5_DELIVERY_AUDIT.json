@@ -1,0 +1,17 @@
+{
+  "source_commit": "8a7c56d",
+  "completed_jobs": 47,
+  "nonzero_exits": 0,
+  "scope_cut": false,
+  "checked_training_logs": 1957,
+  "missing_training_logs": [],
+  "spatial_seeds_each_network_each_dataset": 10,
+  "additional_partitions": 6,
+  "C1_supported": true,
+  "C2_reversal": {
+    "drn_lak": false,
+    "gnn_geo": false
+  },
+  "C3_condition_met": true,
+  "limitation": "Consistency/completeness audit of committed logs and final reports; not a fresh full inference run."
+}

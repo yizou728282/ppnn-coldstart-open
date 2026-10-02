@@ -1,0 +1,86 @@
+{
+ "name": "stage4_pilot",
+ "registered": "2026-09-26, before any pilot training run (only a 2-epoch / 300-slice smoke test, see md)",
+ "status": "PILOT of a new method; motivated by the exploratory analysis NOTES_stage4_analysis.md",
+ "method_summary": "SAMOS-style climatological standardisation fitted on training stations only (ridge regression of climatological mean and log-variance of obs and of the t2m ensemble mean on [1,lat,lon,alt,alt-orog] x [1,sin/cos 1st and 2nd annual harmonic] (+ lead one-hot x [1,sin1,cos1] for EUPPBench)); network models the standardised anomaly with an ensemble-anchored residual mean mu = m_y + s_y*(z_f + g) and constrained spread sigma = s_y*sqrt(softplus(c)^2+softplus(d)^2 z_s^2); single-head attention over the K=8 nearest available TRAINING stations (self excluded) + learned null slot; neighbour token = [z_f_j, z_s_j, z_f_j - z_f_i, distance/100km, altitude difference/500m, (alt-orog) difference/500m, learned 4-d embedding of station j]; own input = all z-scored ensemble statistics + z_f + z_s + 4 standardised attributes + time features (as drn_lak); trained with random station masking: per batch a fraction U(0,0.5) of training stations removed from the neighbour pool, and per sample with probability 0.5 all training stations within r~U(0,300) km of the target removed. The target's own embedding is never used, so every prediction is made as for a new station. Val/test: no masking. Implementation: src/ppnn_residual/stage4_pilot.py",
+ "methods": {
+  "samos_attn": {
+   "use_neighbors": true,
+   "masking": true,
+   "K": 8,
+   "hidden": 128,
+   "att_dim": 32,
+   "emb_dim": 4,
+   "p_drop_max": 0.5,
+   "p_disc": 0.5,
+   "r_max_km": 300.0,
+   "clim_ridge": 1.0,
+   "clim_max_rows": 400000,
+   "lr": 0.001,
+   "batch_size": 4096,
+   "max_epochs": 30,
+   "patience": 3,
+   "role": "pilot method"
+  },
+  "samos_mlp": {
+   "use_neighbors": false,
+   "masking": false,
+   "K": 8,
+   "hidden": 128,
+   "att_dim": 32,
+   "emb_dim": 4,
+   "p_drop_max": 0.5,
+   "p_disc": 0.5,
+   "r_max_km": 300.0,
+   "clim_ridge": 1.0,
+   "clim_max_rows": 400000,
+   "lr": 0.001,
+   "batch_size": 4096,
+   "max_epochs": 30,
+   "patience": 3,
+   "role": "ablation: same standardisation and output, no neighbours/attention/masking"
+  }
+ },
+ "no_tuning": "all hyperparameters fixed a priori as listed; no selection on any test-period score",
+ "data_folds_periods": "as protocols/stage4_baselines.json (German = Stage 2, EUPPBench = Stage 3)",
+ "seeds": {
+  "random": [
+   0,
+   1,
+   2
+  ],
+  "spatial": [
+   0,
+   1,
+   2
+  ]
+ },
+ "phase_1": "German data, random + spatial folds, samos_attn and samos_mlp, seeds 0-2",
+ "phase_2_condition": "EUPPBench (same design) is run only if phase 1 is 'promising': the German spatial-fold CRPS of samos_attn is lower than that of the best primary comparator (point estimate)",
+ "comparators": {
+  "primary": [
+   "nn_unk",
+   "nn_knn",
+   "emos_bst_gl"
+  ],
+  "strict_secondary": [
+   "nn_unk",
+   "nn_knn",
+   "emos_bst_gl",
+   "nn_noemb",
+   "nn_hybrid",
+   "nn_hybrid_res",
+   "drn_lak",
+   "gnn_geo"
+  ],
+  "seed_rule": "networks compared as seeds 0-2 ensembles (mean of mu and sigma) on both fold types"
+ },
+ "tests": "DM on daily (per-initialisation) mean CRPS differences, Newey-West lag 5, two-sided; 7-day moving-block bootstrap, 10000 reps, 95% CI; BH q=0.05 over the family {samos_attn vs each primary comparator} x {random, spatial} (6 tests) per dataset",
+ "go_no_go": {
+  "GO": "on the German data, samos_attn vs the best primary comparator on SPATIAL folds (lowest CRPS among the three) is BH-significant AND the bootstrap CI excludes 0 AND samos_attn is better, AND on RANDOM folds samos_attn has the same sign (lower CRPS) vs the best primary comparator on random folds",
+  "NO_GO": "otherwise",
+  "reporting": "GO/NO-GO is reported whatever the outcome; strict_secondary comparisons, samos_attn vs samos_mlp, per-fold, distance-bin and out-of-range-station diagnostics are reported descriptively",
+  "phase_2_reporting": "if run, EUPPBench is evaluated with the same rule (replication check), and reported whatever the outcome"
+ },
+ "compute": "local 8-core CPU, <=2 processes x 4 threads, resumable"
+}

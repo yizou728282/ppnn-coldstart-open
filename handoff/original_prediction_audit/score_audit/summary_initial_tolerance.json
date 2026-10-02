@@ -1,0 +1,151 @@
+{
+  "source_commit": "8858ddbcffb146d82030a2ba126502eb0c4784be",
+  "metadata": [
+    {
+      "dataset": "german",
+      "rows": 182218,
+      "all_arrays_match_checkout": true
+    },
+    {
+      "dataset": "euppbench",
+      "rows": 423090,
+      "all_arrays_match_checkout": true
+    }
+  ],
+  "checks": 1986,
+  "failures": [
+    {
+      "label": "seen/german/emos_gl",
+      "value": 1.0092395934879792,
+      "expected": 1.00924,
+      "abs_difference": 4.065120207119577e-07,
+      "passed": false
+    },
+    {
+      "label": "seen/german/emos_bst_gl",
+      "value": 0.9112721976954097,
+      "expected": 0.91127,
+      "abs_difference": 2.1976954096558643e-06,
+      "passed": false
+    },
+    {
+      "label": "seen/german/nn_unk",
+      "value": 0.7870537433807756,
+      "expected": 0.78705,
+      "abs_difference": 3.743380775578231e-06,
+      "passed": false
+    },
+    {
+      "label": "seen/german/nn_knn",
+      "value": 0.787712648670546,
+      "expected": 0.78771,
+      "abs_difference": 2.648670546001597e-06,
+      "passed": false
+    },
+    {
+      "label": "seen/german/nn_noemb",
+      "value": 0.8476416121578614,
+      "expected": 0.84764,
+      "abs_difference": 1.612157861430319e-06,
+      "passed": false
+    },
+    {
+      "label": "seen/german/nn_attr",
+      "value": 0.8362651477061503,
+      "expected": 0.83627,
+      "abs_difference": 4.852293849610945e-06,
+      "passed": false
+    },
+    {
+      "label": "seen/german/nn_hybrid",
+      "value": 0.7849420225223275,
+      "expected": 0.78494,
+      "abs_difference": 2.022522327504994e-06,
+      "passed": false
+    },
+    {
+      "label": "seen/german/nn_hybrid_knn",
+      "value": 0.7849084404968131,
+      "expected": 0.78491,
+      "abs_difference": 1.5595031869208853e-06,
+      "passed": false
+    },
+    {
+      "label": "seen/german/nn_hybrid_res",
+      "value": 0.7829024567604062,
+      "expected": 0.7829,
+      "abs_difference": 2.4567604061109805e-06,
+      "passed": false
+    },
+    {
+      "label": "seen/euppbench/emos_gl",
+      "value": 1.1103833470268862,
+      "expected": 1.11038,
+      "abs_difference": 3.3470268863133867e-06,
+      "passed": false
+    },
+    {
+      "label": "seen/euppbench/emos_bst_gl",
+      "value": 0.954334930738187,
+      "expected": 0.95433,
+      "abs_difference": 4.930738186970096e-06,
+      "passed": false
+    },
+    {
+      "label": "seen/euppbench/nn_unk",
+      "value": 0.8217706457356042,
+      "expected": 0.82177,
+      "abs_difference": 6.45735604209996e-07,
+      "passed": false
+    },
+    {
+      "label": "seen/euppbench/nn_knn",
+      "value": 0.8217706457356042,
+      "expected": 0.82177,
+      "abs_difference": 6.45735604209996e-07,
+      "passed": false
+    },
+    {
+      "label": "seen/euppbench/nn_noemb",
+      "value": 0.8350893038758063,
+      "expected": 0.83509,
+      "abs_difference": 6.961241937331053e-07,
+      "passed": false
+    },
+    {
+      "label": "seen/euppbench/nn_attr",
+      "value": 0.8285287820987214,
+      "expected": 0.82853,
+      "abs_difference": 1.2179012786051047e-06,
+      "passed": false
+    },
+    {
+      "label": "seen/euppbench/nn_hybrid",
+      "value": 0.8258983500359456,
+      "expected": 0.8259,
+      "abs_difference": 1.6499640543843341e-06,
+      "passed": false
+    },
+    {
+      "label": "seen/euppbench/nn_hybrid_knn",
+      "value": 0.8258983500359456,
+      "expected": 0.8259,
+      "abs_difference": 1.6499640543843341e-06,
+      "passed": false
+    },
+    {
+      "label": "seen/euppbench/nn_hybrid_res",
+      "value": 0.8229288843827745,
+      "expected": 0.82293,
+      "abs_difference": 1.1156172255999408e-06,
+      "passed": false
+    }
+  ],
+  "score_metric_checks": 396,
+  "single_seed_checks": 272,
+  "seen_score_checks": 18,
+  "daily_comparisons": 64,
+  "stage23_comparisons": 60,
+  "max_score_difference": 2.220446049250313e-16,
+  "scope": "Original main/calibration/seen scores and Stage-4 descriptive/pilot daily tests; independent outputs only."
+}

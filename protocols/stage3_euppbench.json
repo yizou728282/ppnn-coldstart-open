@@ -1,0 +1,75 @@
+{
+  "name": "stage3_euppbench_new_station",
+  "registered": "2026-09-26, before any Stage-3 model was trained or any Stage-3 test-period score was computed",
+  "purpose": "independent validation of the Stage-2 new-station study (protocols/stage2_new_station.json) on a different dataset: EUPPBench v1.0 station data",
+  "data": {
+    "source": "EUPPBench v1.0 station data, Zenodo 10.5281/zenodo.7708362 (EUPPBench-stations.zip, 18,324,361,137 bytes, md5 e409457279b3494d18f2dfb41f3f449b); subset fetched from the official climetlab/ECMWF object store, every file verified by size + CRC32 against the Zenodo zip central directory (scripts/stage3_download.py)",
+    "countries": ["austria", "belgium", "france", "germany", "netherlands"],
+    "not_available": "Swiss stations (not in the public dataset: MeteoSwiss data are not openly licensed)",
+    "station_inclusion_rule": "a station is used if it has >= 50% non-missing t2m observations at the 5 lead times both in the reforecast fit+validation period and in the test period; excluded stations are listed in results/stage3/stations.csv. The rule uses data availability only.",
+    "target": "2 m temperature observation at the station (degC)",
+    "lead_times_h": [24, 48, 72, 96, 120],
+    "initialization": "00 UTC; all five lead times verify at 00 UTC",
+    "ensemble_variables": {
+      "surface": ["t2m", "u10", "v10", "tcc", "sd", "stl1", "swvl1", "tcwv", "cape"],
+      "postprocessed_6h_window_ending_at_lead": ["mx2t6", "mn2t6", "sshf6", "slhf6", "ssr6", "str6"],
+      "pressure_850hPa": ["t"]
+    },
+    "ensemble_statistics": "for each of the 16 variables: ensemble mean and ensemble standard deviation (ddof=1) over the available members; temperatures (t2m, stl1, mx2t6, mn2t6, t850) converted to degC",
+    "member_mismatch": "training/validation reforecasts have 11 members (control + 10 perturbed), test forecasts have 51. PRIMARY: test statistics from all 51 members (operational use). SENSITIVITY (secondary, same trained models, no refit): test statistics from members 0-10 only (control + first 10 perturbed), matching the training ensemble size.",
+    "other_inputs": ["day-of-year sin and cos of the valid date", "lead-time one-hot (5)", "station attributes (below) as plain inputs"],
+    "station_attributes": ["lat", "lon", "station_altitude", "model_orography", "station_altitude - model_orography", "CORINE land-use level-1 class of the station, one-hot: artificial (1-11), agricultural (12-22), forest/semi-natural (23-34), wetland (35-39), water/no-data (40-48)"],
+    "missing_values": "rows with missing observation or missing t2m ensemble statistics are dropped; any other missing predictor is set to its training mean (0 after standardization); counts reported"
+  },
+  "periods": {
+    "fit": "reforecast samples whose VALID date is in 1997-2014",
+    "early_stopping": "reforecast samples whose valid date is in 2015-2016 (training stations only)",
+    "excluded": "reforecast samples with valid date >= 2017-01-01 (the reforecasts attached to 2018 model dates cover 2017 and would overlap the test period)",
+    "test": "all 730 daily 00 UTC ensemble forecasts initialized 2017-01-01 ... 2018-12-31, leads 24-120 h (valid 2017-01-02 ... 2019-01-05)",
+    "refit": "none (network at the best early-stopping epoch; EMOS/boosting fitted on the fit period only, exactly as in Stage 2)"
+  },
+  "lead_time_handling": "ONE network per (variant, fold, seed) with lead-time one-hot inputs, shared station representation across leads (5x fewer runs; each station embedding sees 5x more data; the hidden layer can learn lead interactions). Linear baselines (global EMOS, global boosted EMOS, local boosted EMOS reference) are fitted SEPARATELY PER LEAD TIME, as is standard, because a linear model cannot represent lead-dependent coefficients otherwise.",
+  "folds": {
+    "primary": {"type": "random_station", "K": 7, "seed": 2026, "unit": "included station ids"},
+    "secondary": {"type": "spatial_kmeans_latlon", "K": 7, "seed": 2026},
+    "rule": "held-out stations are removed from ALL fitting steps (fit, early stopping, standardization statistics, EMOS/boosting); only their test-period rows are scored as new stations"
+  },
+  "methods": {
+    "raw_ensemble_gauss": "N(ens mean, ens sd) of t2m",
+    "emos_gl": "global EMOS per lead time, min-CRPS, fitted on training stations (fit period)",
+    "emos_bst_gl": "global boosted EMOS per lead time (Gaussian, log-link scale, ML, component-wise boosting on all predictors, standardized response, step 0.05, max 1000 iterations, AIC stopping), fitted on training stations (fit period)",
+    "nn_unk": "NN with station embedding; unseen stations use the reserved UNK embedding trained with 5% station dropout",
+    "nn_knn": "same trained networks as nn_unk; unseen-station embedding = IDW mean of the k=5 nearest training stations' embeddings, distance sqrt(d_km^2 + (0.1 km/m * d_alt_m)^2)",
+    "nn_noemb": "no embedding; station attributes are plain inputs",
+    "nn_attr": "embedding = MLP(station attributes) -> 2-d, trained jointly, used for all stations",
+    "nn_hybrid": "PROPOSED in Stage 2 (definition unchanged): embedding = MLP(attributes) + free per-station offset; offset zeroed with probability 0.5 per sample during training; unseen stations use offset 0",
+    "nn_hybrid_res": "EXPLORATORY: nn_hybrid + residual mean + constrained spread (as Stage 2)",
+    "nn_hybrid_knn": "EXPLORATORY: nn_hybrid with offset for unseen stations = kNN-IDW mean of training offsets"
+  },
+  "nn_hyperparameters": {"hidden": 512, "emb_dim": 2, "attr_mlp_hidden": 32, "optimizer": "Adam", "lr": 0.002, "batch_size": 4096,
+                         "max_epochs": 30, "patience": 3, "station_dropout_unk": 0.05, "hybrid_offset_dropout": 0.5,
+                         "note": "identical to Stage 2; nothing is tuned",
+                         "seeds_primary": [0,1,2,3,4,5,6,7,8,9], "seeds_secondary_spatial": [0,1,2]},
+  "compute": {"networks": "all Stage-3 networks are trained in the same Google Colab GPU environment (NVIDIA T4, CUDA) with torch deterministic algorithms enabled, CUBLAS_WORKSPACE_CONFIG=:4096:8, cudnn.benchmark off; random streams (permutations, dropout masks) are drawn from seeded CPU generators so they do not depend on the device",
+              "baselines": "EMOS/boosting are deterministic numpy code (run on the Colab CPU)",
+              "smoke_test": "a tiny pipeline test (1 fold, 1 seed, <=2 epochs, subsampled) was run on a CPU box before Colab; its outputs are discarded and never reported"},
+  "reference_seen_stations": {"emos_loc_bst": "per-station, per-lead boosted EMOS fitted on each station's fit+validation-period reforecasts (valid 1997-2016), predictors excluding station attributes, AIC stopping, tested on the test period of all stations (seen-station reference)"},
+  "metrics": {"primary": "mean Gaussian CRPS (degC) over all test rows (5 leads) of held-out stations, pooled over the 7 folds (each station held out exactly once), 10-seed-ensemble forecast (mean of mu and sigma over seeds)",
+              "secondary": ["CRPSS vs raw_ensemble_gauss and vs emos_gl", "CRPS per lead time", "MAE", "RMSE", "coverage of central 80% and 90% intervals", "PIT histogram (10 bins) and reliability index", "spread-skill ratio", "mean bias", "seen-station CRPS of the same models", "single-seed mean +- sd", "per-fold CRPS", "CRPS vs distance to nearest training station", "11-member test sensitivity"]},
+  "significance": {"primary_family": [["nn_hybrid","emos_gl"],["nn_hybrid","emos_bst_gl"],["nn_hybrid","nn_unk"],["nn_hybrid","nn_knn"],["nn_hybrid","nn_noemb"],["nn_hybrid","nn_attr"]],
+                   "test": "Diebold-Mariano on the series of per-initialization-date mean CRPS differences (730 dates; mean over held-out stations and the 5 leads), Newey-West lag 5, two-sided, seed-ensemble forecasts",
+                   "bootstrap": "moving-block bootstrap of the same series, block 7 days, 10000 reps, 95% CI of the mean difference",
+                   "multiplicity": "Benjamini-Hochberg q=0.05 across the 6 primary comparisons",
+                   "station_level": "station-wise DM (lag 1) on per-date mean over leads + BH q=0.05; fractions of held-out stations significantly better/worse",
+                   "secondary_comparisons": "all other pairs reported without claims"},
+  "decision_rules": ["Claim 'nn_hybrid better than X' only if the BH-adjusted DM test is significant AND the bootstrap CI excludes 0 AND the sign agrees in the spatial-fold check (same rule as Stage 2).",
+                     "No hyperparameter, variant, predictor or epoch is selected using test-period data. Exploratory methods remain exploratory regardless of results."],
+  "replication_hypotheses_from_stage2": {
+    "H1": "every network variant has lower held-out CRPS than emos_gl and emos_bst_gl (random and spatial folds)",
+    "H2": "on random folds, nn_hybrid, nn_attr and nn_noemb are within 1% of each other and all better than nn_unk",
+    "H3": "on spatial folds, nn_noemb is better than nn_attr and nn_hybrid",
+    "H4": "nn_knn is worse than nn_unk",
+    "H5": "on seen stations nn_hybrid is better than nn_noemb",
+    "evaluation": "each hypothesis is reported as supported / not supported using the seed-ensemble CRPS and, where a pair is tested, the DM/bootstrap results; no claims beyond these"
+  }
+}

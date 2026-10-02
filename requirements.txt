@@ -1,0 +1,10 @@
+numpy==2.5.3
+pandas==3.0.6
+scipy==1.18.1
+torch==2.14.0   # CPU build is sufficient: pip install torch --index-url https://download.pytorch.org/whl/cpu
+matplotlib==3.11.2
+pyarrow==25.0.1
+requests==2.34.2     # stage3_download.py
+zarr==2.18.7         # stage3_preprocess.py (EUPPBench Zarr stores)
+numcodecs==0.15.1
+pytest

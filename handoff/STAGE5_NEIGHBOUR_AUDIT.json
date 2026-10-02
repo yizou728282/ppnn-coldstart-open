@@ -1,0 +1,53 @@
+{
+  "description": "Metadata reconstruction of forecast-only test-neighbour changes; no retraining",
+  "scored_test_rows": 423090,
+  "missing_observations_with_forecasts": 3960,
+  "gnn_changed": 10910,
+  "gnn_fraction": 0.025786475690751376,
+  "gnn_matches_original_run_logs": true,
+  "samos_attn_spatial_changed": 27370,
+  "samos_attn_spatial_fraction": 0.06469072774114254,
+  "samos_attn_per_fold": [
+    {
+      "paper_fold": 1,
+      "scored": 99640,
+      "changed": 4515
+    },
+    {
+      "paper_fold": 2,
+      "scored": 10950,
+      "changed": 1020
+    },
+    {
+      "paper_fold": 3,
+      "scored": 43600,
+      "changed": 780
+    },
+    {
+      "paper_fold": 4,
+      "scored": 80300,
+      "changed": 13360
+    },
+    {
+      "paper_fold": 5,
+      "scored": 62000,
+      "changed": 975
+    },
+    {
+      "paper_fold": 6,
+      "scored": 75645,
+      "changed": 4505
+    },
+    {
+      "paper_fold": 7,
+      "scored": 50955,
+      "changed": 2215
+    }
+  ],
+  "preprocessing_info": {
+    "n_train_forecast_rows_missing_obs": 86368,
+    "n_train_rows_missing_forecast": 0,
+    "n_test_forecast_rows_missing_obs": 3960,
+    "n_test_rows_missing_forecast": 0
+  }
+}

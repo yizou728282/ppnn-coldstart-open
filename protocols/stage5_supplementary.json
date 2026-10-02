@@ -1,0 +1,407 @@
+{
+  "name": "stage5_supplementary",
+  "registered": "2026-09-26 ~23:45 UTC-6, before any Stage-5 model run or result (only coordinate-based partition checks)",
+  "status": "supplementary robustness stage addressing inference units, seed variance, HAC bandwidth, baselines, alternative spatial partitions and neighbour availability; does not retroactively pre-register the random-vs-spatial narrative",
+  "A_seeds": {
+    "euppbench_primary_spatial": {
+      "folds": "results/stage3/folds_spatial.csv (k-means seed 2026, K=7)",
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "new_seeds": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "methods": [
+        "nn_unk",
+        "nn_knn",
+        "nn_noemb",
+        "nn_attr",
+        "nn_hybrid",
+        "nn_hybrid_knn",
+        "nn_hybrid_res",
+        "drn_lak",
+        "gnn_geo",
+        "samos_mlp",
+        "samos_attn"
+      ],
+      "threads": 3
+    },
+    "german_primary_spatial": {
+      "folds": "results/stage2/folds_spatial.csv",
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "new_seeds": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "methods_in_priority_order": [
+        [
+          "nn_unk",
+          "nn_noemb",
+          "nn_attr",
+          "nn_hybrid",
+          "nn_hybrid_res"
+        ],
+        [
+          "drn_lak",
+          "samos_mlp"
+        ],
+        [
+          "gnn_geo",
+          "samos_attn"
+        ]
+      ],
+      "threads": 3
+    },
+    "seed_ensemble": "mean of mu and mean of sigma over seeds (unchanged)"
+  },
+  "B_partitions_euppbench": {
+    "partitions": {
+      "km7_s2027": {
+        "rule": "spatial_folds(K=7, seed=2027, n_init=1)",
+        "sizes": [
+          13,
+          11,
+          34,
+          16,
+          17,
+          23,
+          3
+        ],
+        "ari_vs_primary": 0.717
+      },
+      "km7_s2028": {
+        "rule": "spatial_folds(K=7, seed=2028, n_init=1)",
+        "sizes": [
+          14,
+          17,
+          34,
+          18,
+          14,
+          3,
+          17
+        ],
+        "ari_vs_primary": 0.819
+      },
+      "km7_s2029": {
+        "rule": "spatial_folds(K=7, seed=2029, n_init=1)",
+        "sizes": [
+          4,
+          7,
+          17,
+          21,
+          20,
+          27,
+          21
+        ],
+        "ari_vs_primary": 0.736
+      },
+      "km5_s2026": {
+        "rule": "spatial_folds(K=5, seed=2026, n_init=20)",
+        "sizes": [
+          20,
+          11,
+          26,
+          35,
+          25
+        ],
+        "ari_vs_primary": 0.642
+      },
+      "km10_s2026": {
+        "rule": "spatial_folds(K=10, seed=2026, n_init=20)",
+        "sizes": [
+          15,
+          11,
+          15,
+          15,
+          16,
+          3,
+          10,
+          13,
+          7,
+          12
+        ],
+        "ari_vs_primary": 0.582
+      },
+      "loco": {
+        "rule": "leave-one-country-out",
+        "sizes": {
+          "austria": 4,
+          "belgium": 27,
+          "germany": 49,
+          "france": 7,
+          "netherlands": 30
+        }
+      }
+    },
+    "why_single_start_for_extra_K7": "n_init=20 with other seeds returns the primary partition or near-copies (ARI 0.79-1.0); computed from coordinates only",
+    "methods": [
+      "emos_bst_gl",
+      "nn_unk",
+      "nn_hybrid_res",
+      "drn_lak",
+      "gnn_geo",
+      "samos_mlp",
+      "emos_nn1",
+      "emos_idw",
+      "emos_reg",
+      "emos_regidw",
+      "samos_lin"
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "not_done": [
+      "buffered leave-one-out",
+      "variogram analysis"
+    ]
+  },
+  "C_new_baselines": {
+    "fit_period": {
+      "german": "2007-2014",
+      "euppbench": "reforecasts valid <= 2014"
+    },
+    "local_emos": "per station and lead, mu=a+b m, sigma^2=c^2+d^2 s^2, min-CRPS (fit_emos); own-station fit never used for a held-out station",
+    "emos_nn1": "coefficients of nearest training station (distance sqrt(d_km^2+(0.1 km/m * dalt)^2))",
+    "emos_idw": "IDW k=5, weights 1/d, same kernel as nn_knn (knn_idw)",
+    "emos_reg": "OLS of each coefficient (a, b, c^2, d^2) on [1, lat, lon, alt, orog, alt-orog] over training stations, per lead",
+    "emos_regidw": "PRIMARY interpolated baseline: emos_reg trend + IDW(k=5) of station residuals",
+    "variance_floor": 1e-06,
+    "samos_lin": "Stage-4 attribute-ridge climatology (Climatology class, clim_ridge=1.0, clim_max_rows=400000) for obs and t2m ensemble mean; global EMOS per lead in anomaly space z_y ~ N(a+b z_f, c^2+d^2 z_s^2); back-transformed",
+    "bst_iteration_sensitivity": {
+      "dataset": "euppbench",
+      "fold_types": [
+        "spatial",
+        "random"
+      ],
+      "maxit_path": 4000,
+      "report_m": [
+        100,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "also": [
+        "AIC mstop",
+        "validation-selected m (fit <=2014, min CRPS on training stations' 2015-2016 reforecasts)"
+      ],
+      "note": "only validation-selected m may be proposed as alternative; fixed-m test scores are sensitivity only"
+    },
+    "applied_to": [
+      "german random",
+      "german spatial",
+      "euppbench random",
+      "euppbench spatial",
+      "all euppbench partitions of B"
+    ],
+    "role": "descriptive comparators, no superiority hypothesis"
+  },
+  "D_inference": {
+    "delta": "CRPS_A - CRPS_B on held-out rows pooled over folds (negative = A better)",
+    "primary": {
+      "type": "station-cluster bootstrap with nested seed resampling",
+      "reps": 2000,
+      "statistic": "row-weighted ratio",
+      "report": [
+        "95% percentile CI",
+        "P(delta<0)"
+      ]
+    },
+    "also_unnested_station_bootstrap_reps": 10000,
+    "co_primary": {
+      "type": "fold-block bootstrap nested with seed resampling",
+      "reps": 2000
+    },
+    "rank_tests": {
+      "fold_level": [
+        "exact sign test",
+        "Wilcoxon signed-rank"
+      ],
+      "station_level": [
+        "exact sign test",
+        "Wilcoxon signed-rank (descriptive; spatially correlated)"
+      ]
+    },
+    "dm": {
+      "series": "per-day mean delta (German date, EUPPBench initialisation date)",
+      "hac": "Bartlett, automatic bandwidth Newey-West (1994) [primary], Andrews (1991) AR(1) [sensitivity]",
+      "hln": {
+        "h_days": {
+          "german": 2,
+          "euppbench": 5
+        },
+        "reference": "t(n-1)"
+      },
+      "fixed_lags": [
+        5,
+        20,
+        40
+      ],
+      "fixed_b": "Kiefer-Vogelsang Bartlett 5% cv 1.96+2.9694b+0.4160b^2-0.5324b^3",
+      "block_bootstrap_days": [
+        7,
+        14,
+        30
+      ],
+      "block_bootstrap_reps": 10000
+    },
+    "multiplicity": "BH q=0.05 within (dataset, fold type) over pair list, primary DM",
+    "ranking_probabilities": [
+      "pairwise P(A<B) from nested station bootstrap",
+      "P(rank 1) among methods present",
+      "seed-only: P(single-seed A < single-seed B) over seed pairs",
+      "per-seed CRPS lists"
+    ],
+    "pairs_vs_emos_bst_gl": [
+      "nn_unk",
+      "nn_knn",
+      "nn_noemb",
+      "nn_attr",
+      "nn_hybrid",
+      "nn_hybrid_res",
+      "drn_lak",
+      "gnn_geo",
+      "samos_mlp",
+      "samos_attn",
+      "emos_regidw",
+      "samos_lin"
+    ],
+    "pairs_vs_nn_hybrid_res": [
+      "drn_lak",
+      "gnn_geo",
+      "nn_unk",
+      "samos_mlp"
+    ],
+    "extra_pairs": [
+      [
+        "emos_regidw",
+        "emos_gl"
+      ]
+    ],
+    "applied_to": [
+      "existing Stage 2/3/4 predictions (first)",
+      "10-seed spatial predictions",
+      "each partition of B"
+    ]
+  },
+  "E_m1a": {
+    "issue": "neighbour availability = isfinite(y) & isfinite(ens mean) (stage4_run.py:49 gnn aggregation, stage4_pilot.py:144 samos_attn neighbours)",
+    "fix": "neighbour availability = forecast availability; training loss/scoring still on observed rows",
+    "euppbench": "scripts/stage5_preprocess_fcavail.py extracts forecast features of missing-observation (slice, station) pairs of included stations from local zarr copy",
+    "german": "not fixable: published RL18 file contains forecast rows only where obs exist (forecast availability = observation availability in our data); disclosed, not rerun",
+    "reruns": [
+      [
+        "euppbench",
+        "spatial",
+        "gnn_geo",
+        [
+          0,
+          1,
+          2
+        ]
+      ],
+      [
+        "euppbench",
+        "random",
+        "gnn_geo",
+        [
+          0,
+          1,
+          2
+        ]
+      ],
+      [
+        "euppbench",
+        "spatial",
+        "samos_attn",
+        [
+          0,
+          1,
+          2
+        ]
+      ]
+    ],
+    "impact": "delta CRPS fixed-original with station bootstrap CI; fraction of held-out test (slice, station) whose neighbour set changes",
+    "rule": "original stays primary; if |delta| >= 0.005 degC report fixed numbers alongside"
+  },
+  "F_decision_rules": {
+    "E": "emos_bst_gl",
+    "F": [
+      "drn_lak",
+      "gnn_geo"
+    ],
+    "secondary": [
+      "nn_unk",
+      "nn_noemb",
+      "nn_attr",
+      "nn_hybrid",
+      "samos_mlp"
+    ],
+    "DiD": "per-station (F-E)_spatial - (F-E)_random, seed-nested station bootstrap",
+    "C1_supported": "EUPPBench primary spatial, 10 seeds: DiD_drn>0 and DiD_gnn>0 with station CI excluding 0 AND for each F point estimate (F-E)_partition-(F-E)_random > 0 in >=4 of 6 partitions",
+    "C1_contradicted": "either DiD CI entirely below 0, or either F has DiD<=0 in >=4 of 6 partitions",
+    "C1_otherwise": "inconclusive; wording 'in this benchmark the primary spatial partition suggests ...' with interval",
+    "C1_fold_block_note": "fold-block CI including 0 does not overturn 'supported' but text must say effect concentrated in few regions, named from per-fold table",
+    "C2_reversal": "only if random F-E<0 with station CI excl 0 AND spatial F-E>0 with station CI excl 0",
+    "C3_sparse_specific": "only if C1 supported on EUPPBench AND German DiD_F CI includes 0 or lies below 0 for both F; always note density confounded with domain/leads/predictors",
+    "C4_pairwise": "claim only if nested station-bootstrap CI excludes 0 AND BH-adjusted primary DM rejects; station CI excl 0 but fold-block CI incl 0 -> 'better on average over stations, not consistently across regions'; station CI incl 0 -> 'statistically tied'",
+    "C5_seeds": "if nested-bootstrap P(A<B) in [0.1, 0.9] no ordering is stated",
+    "C6_baselines": "if emos_regidw or samos_lin beats every network on EUPPBench spatial it is reported and included in conclusions; no Stage-5 outcome removes a previously reported result"
+  },
+  "G_compute": {
+    "threads_max": 6,
+    "workers": 2,
+    "threads_per_worker": 3,
+    "launcher": "scripts/stage5_launch.py (setsid nohup), logs results/stage5/logs/",
+    "lane_hours_estimate": {
+      "inference_existing": 0.3,
+      "eupp_seeds_stage3_nets": 2.4,
+      "new_baselines": 0.5,
+      "eupp_seeds_stage4": 5.0,
+      "bst_sens_spatial": 0.9,
+      "interim_eval": 0.3,
+      "partitions": 11.4,
+      "german_seeds": 5.6,
+      "m1a": 3.5,
+      "bst_sens_random": 0.9,
+      "final_eval": 0.5
+    },
+    "wall_estimate_h": "16-18",
+    "scope_cut": "after 22 h wall since launch, unstarted jobs dropped in reverse priority (final evaluation always runs); incomplete partitions excluded entirely; documented in NOTES_stage5.md"
+  },
+  "unchanged": "data, folds, periods, hyper-parameters, seen-station early stopping; no test score selects any setting; smoke tests on subsamples to /tmp, discarded"
+}

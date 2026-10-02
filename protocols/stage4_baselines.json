@@ -1,0 +1,41 @@
+{
+  "name": "stage4_baselines",
+  "registered": "2026-09-26, before any Stage-4 model was trained (code smoke tests on tiny subsamples excepted; their outputs are discarded)",
+  "purpose": "add the two strongest published competitors for unobserved-station post-processing (Lakatos 2026, arXiv:2609.07512) to the Stage-2 (German RL18) and Stage-3 (EUPPBench) new-station benchmarks; baselines only, no superiority hypothesis",
+  "datasets": {
+    "german": {"protocol": "protocols/stage2_new_station.json", "fit": "2007-2014", "early_stopping": "2015", "test": "2016", "lead_h": [48]},
+    "euppbench": {"protocol": "protocols/stage3_euppbench.json", "fit": "reforecasts valid 1997-2014", "early_stopping": "reforecasts valid 2015-2016", "test": "forecasts 2017-2018 (51 members)", "lead_h": [24, 48, 72, 96, 120]}
+  },
+  "folds": "identical to Stage 2 / Stage 3 (results/stage{2,3}/folds_{random,spatial}.csv); held-out stations excluded from all fitting steps (normalisation, training, early stopping)",
+  "seeds": {"random": [0, 1, 2], "spatial": [0, 1, 2], "note": "modest (3) seeds for time; random-fold comparisons with existing networks use the same seeds 0-2 of those networks (fair 3-seed ensembles); 10-seed numbers of existing networks are shown for reference only"},
+  "methods": {
+    "drn_lak": {
+      "description": "Lakatos-style DRN: 1 hidden layer MLP, no station embedding, Gaussian output (mu, |sigma|), CRPS loss. Architecturally the same model class as nn_noemb; differs in hyperparameters and inputs, which are matched to Lakatos 2026 Table A2 (T2M, extended feature set) and Table A1",
+      "inputs": "all ensemble mean and sd predictors of the dataset (German: 34 as in Stage 2; EUPPBench: 32 as in Stage 3) + lat, lon, alt, orog + sin(2*pi*doy/365.25), doy, month (+ lead one-hot for EUPPBench). No alt-orog and no land-use (Lakatos does not use them). Inputs z-scored with training-station fit-period statistics",
+      "hidden": 256, "activation": "ReLU (not stated in paper; Rasp & Lerch default)", "dropout": 0.3, "optimizer": "Adam", "lr": 0.01, "batch_size": 4800,
+      "max_epochs": 30, "patience": 3, "early_stopping": "as Stage 2/3 (paper does not state epochs)",
+      "deviation_from_paper": "no rolling daily refit (paper: rolling 3283-day window ~ all history; here one fit on the full fit period); predictor sets are those of our datasets"
+    },
+    "gnn_geo": {
+      "description": "GNN-Geo as in Lakatos 2026 Sec. 3.2.2: GraphSAGE, mean aggregation, graph from haversine distance, edge iff distance <= 50 km (altitude ignored), binary, undirected, no self-loops, isolated nodes allowed (they use only the root term)",
+      "layer": "h_i = ReLU(W_root x_i + W_nb mean_{j in N(i), available at t} x_j + b); dropout; linear -> (mu, |sigma|)",
+      "inputs": "same node features as drn_lak",
+      "hidden": 256, "layers": 1, "dropout": 0.2, "optimizer": "Adam", "lr": 0.02, "batch": "256 time slices (graphs) per step",
+      "time_slice": "German: one date; EUPPBench: one (initialisation, lead) pair",
+      "max_epochs": 100, "patience": 5,
+      "why_more_epochs": "an epoch has only ~12 (German) to ~70 (EUPPBench) optimiser steps with 256-slice batches, vs ~300-430 for the row-level networks",
+      "graph_during_training": "training stations of the fold only (held-out stations are not nodes during fit or early stopping)",
+      "graph_at_test": "all stations (training + held-out); a held-out node aggregates the observation-free forecast features of all stations within 50 km; loss/scores only on held-out nodes",
+      "missing": "a (slice, station) with missing observation has no forecast row in our files; such nodes are removed from that slice (not aggregated, not scored)",
+      "deviation_from_paper": "no rolling refit (paper used a 361-day rolling window for GNN-Geo); unobserved stations are not in the training graph (stricter than a fixed all-station graph)"
+    }
+  },
+  "existing_methods_reused": "raw_ensemble_gauss, emos_gl, emos_bst_gl, nn_unk, nn_knn, nn_noemb, nn_attr, nn_hybrid, nn_hybrid_res from results/stage{2,3}/preds (unchanged)",
+  "metrics": "as Stage 2/3: mean Gaussian CRPS over held-out rows pooled over folds (seed-ensemble: mean of mu and sigma), MAE, RMSE, cov80/90, PIT RI, spread-skill, bias, per-fold, per-lead, distance bins, single-seed mean+-sd; EUPPBench 51-member test inputs only (no 11-member sensitivity)",
+  "tests": {
+    "descriptive_pairs": [["gnn_geo","nn_unk"],["gnn_geo","nn_knn"],["gnn_geo","emos_bst_gl"],["gnn_geo","drn_lak"],["drn_lak","nn_noemb"],["drn_lak","nn_unk"],["drn_lak","emos_bst_gl"]],
+    "method": "DM on daily (per-initialisation) mean CRPS differences, Newey-West lag 5; 7-day moving-block bootstrap 10000 reps; BH q=0.05 within each (dataset, fold type) family",
+    "claims": "none; these are baselines. Results are reported whatever they are"
+  },
+  "compute": "local 8-core CPU box only; <=2 worker processes x 4 torch threads; resumable per (method, fold, seed)"
+}

@@ -1,0 +1,1122 @@
+[
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "did",
+    "actual": 0.008147039835451841,
+    "expected": 0.008147039835451841,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "lo",
+    "actual": -0.0010047311364517724,
+    "expected": -0.0010047311364517696,
+    "abs_difference": 2.8189256484623115e-18,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "hi",
+    "actual": 0.01210709813963695,
+    "expected": 0.01210709813963695,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "p_did_gt0",
+    "actual": 0.961,
+    "expected": 0.961,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "spatial_F_minus_E",
+    "actual": -0.03989803382592605,
+    "expected": -0.03989803382592605,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "random_F_minus_E",
+    "actual": -0.04804507366137789,
+    "expected": -0.04804507366137789,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "random_F_minus_E_lo",
+    "actual": -0.05378588178679791,
+    "expected": -0.05378588178679791,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "random_F_minus_E_hi",
+    "actual": -0.0369013603721237,
+    "expected": -0.0369013603721237,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "spatial_F_minus_E_lo",
+    "actual": -0.04692589851719157,
+    "expected": -0.04692589851719157,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "spatial_F_minus_E_hi",
+    "actual": -0.031720547746905206,
+    "expected": -0.031720547746905206,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "did",
+    "actual": 0.006165123408708562,
+    "expected": 0.006165123408708562,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "lo",
+    "actual": -0.0089491665859662,
+    "expected": -0.0089491665859662,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "hi",
+    "actual": 0.014506556086851299,
+    "expected": 0.014506556086851292,
+    "abs_difference": 6.938893903907228e-18,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "p_did_gt0",
+    "actual": 0.7885,
+    "expected": 0.7885,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "spatial_F_minus_E",
+    "actual": -0.022383737858409303,
+    "expected": -0.022383737858409303,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "random_F_minus_E",
+    "actual": -0.028548861267117864,
+    "expected": -0.028548861267117864,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "random_F_minus_E_lo",
+    "actual": -0.03260150777322157,
+    "expected": -0.03260150777322157,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "random_F_minus_E_hi",
+    "actual": -0.012180591651328012,
+    "expected": -0.012180591651328012,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "spatial_F_minus_E_lo",
+    "actual": -0.02940493254480956,
+    "expected": -0.029404932544809775,
+    "abs_difference": 2.1510571102112408e-16,
+    "passed": true
+  },
+  {
+    "dataset": "german",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "spatial_F_minus_E_hi",
+    "actual": -0.010241502946700244,
+    "expected": -0.010241502946700244,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "did",
+    "actual": 0.15057406728010214,
+    "expected": 0.15057406728010214,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "lo",
+    "actual": 0.04113922454257768,
+    "expected": 0.041139224542577575,
+    "abs_difference": 1.0408340855860843e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "hi",
+    "actual": 0.3173671381666488,
+    "expected": 0.3173671381666486,
+    "abs_difference": 2.220446049250313e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "p_did_gt0",
+    "actual": 1.0,
+    "expected": 1.0,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "spatial_F_minus_E",
+    "actual": 0.10506646944045694,
+    "expected": 0.10506646944045694,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "random_F_minus_E",
+    "actual": -0.0455075978396452,
+    "expected": -0.0455075978396452,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "random_F_minus_E_lo",
+    "actual": -0.05933439003469726,
+    "expected": -0.05933439003469726,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "random_F_minus_E_hi",
+    "actual": -0.027342969596816927,
+    "expected": -0.027342969596816927,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "spatial_F_minus_E_lo",
+    "actual": -0.005525828947358615,
+    "expected": -0.005525828947358615,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "drn_lak",
+    "field": "spatial_F_minus_E_hi",
+    "actual": 0.27469389022463725,
+    "expected": 0.27469389022463725,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "did",
+    "actual": 0.1022364240587903,
+    "expected": 0.1022364240587903,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "lo",
+    "actual": 0.03724638801225777,
+    "expected": 0.03724638801225777,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "hi",
+    "actual": 0.18274477177950327,
+    "expected": 0.18274477177950327,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "p_did_gt0",
+    "actual": 0.999,
+    "expected": 0.999,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "spatial_F_minus_E",
+    "actual": 0.08651220853089858,
+    "expected": 0.08651220853089858,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "random_F_minus_E",
+    "actual": -0.015724215527891716,
+    "expected": -0.015724215527891716,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "random_F_minus_E_lo",
+    "actual": -0.03322107747342174,
+    "expected": -0.033221077473421526,
+    "abs_difference": 2.1510571102112408e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "random_F_minus_E_hi",
+    "actual": 0.02050639082072878,
+    "expected": 0.020506390820728887,
+    "abs_difference": 1.0755285551056204e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "spatial_F_minus_E_lo",
+    "actual": 0.018135339862654986,
+    "expected": 0.018135339862655205,
+    "abs_difference": 2.185751579730777e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "spatial",
+    "method": "gnn_geo",
+    "field": "spatial_F_minus_E_hi",
+    "actual": 0.18621518960797945,
+    "expected": 0.18621518960797945,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2027",
+    "method": "drn_lak",
+    "field": "did",
+    "actual": 0.20625980325071314,
+    "expected": 0.20625980325071314,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2027",
+    "method": "drn_lak",
+    "field": "lo",
+    "actual": 0.038006466030067285,
+    "expected": 0.038006466030067285,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2027",
+    "method": "drn_lak",
+    "field": "hi",
+    "actual": 0.6469038511470794,
+    "expected": 0.6469038511470793,
+    "abs_difference": 1.1102230246251565e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2027",
+    "method": "drn_lak",
+    "field": "p_did_gt0",
+    "actual": 1.0,
+    "expected": 1.0,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2027",
+    "method": "drn_lak",
+    "field": "spatial_F_minus_E",
+    "actual": 0.16075220541106794,
+    "expected": 0.16075220541106794,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2027",
+    "method": "drn_lak",
+    "field": "random_F_minus_E",
+    "actual": -0.0455075978396452,
+    "expected": -0.0455075978396452,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2027",
+    "method": "gnn_geo",
+    "field": "did",
+    "actual": 0.09452809825056285,
+    "expected": 0.09452809825056285,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2027",
+    "method": "gnn_geo",
+    "field": "lo",
+    "actual": 0.05122729013564963,
+    "expected": 0.05122729013564963,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2027",
+    "method": "gnn_geo",
+    "field": "hi",
+    "actual": 0.15894180453753626,
+    "expected": 0.15894180453753629,
+    "abs_difference": 2.7755575615628914e-17,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2027",
+    "method": "gnn_geo",
+    "field": "p_did_gt0",
+    "actual": 1.0,
+    "expected": 1.0,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2027",
+    "method": "gnn_geo",
+    "field": "spatial_F_minus_E",
+    "actual": 0.07880388272267114,
+    "expected": 0.07880388272267114,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2027",
+    "method": "gnn_geo",
+    "field": "random_F_minus_E",
+    "actual": -0.015724215527891716,
+    "expected": -0.015724215527891716,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2028",
+    "method": "drn_lak",
+    "field": "did",
+    "actual": 0.11174342082692434,
+    "expected": 0.11174342082692423,
+    "abs_difference": 1.1102230246251565e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2028",
+    "method": "drn_lak",
+    "field": "lo",
+    "actual": 0.03348183134001918,
+    "expected": 0.03348183134001918,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2028",
+    "method": "drn_lak",
+    "field": "hi",
+    "actual": 0.2324982659363084,
+    "expected": 0.2324982659363084,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2028",
+    "method": "drn_lak",
+    "field": "p_did_gt0",
+    "actual": 1.0,
+    "expected": 1.0,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2028",
+    "method": "drn_lak",
+    "field": "spatial_F_minus_E",
+    "actual": 0.06623582298727915,
+    "expected": 0.06623582298727904,
+    "abs_difference": 1.1102230246251565e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2028",
+    "method": "drn_lak",
+    "field": "random_F_minus_E",
+    "actual": -0.0455075978396452,
+    "expected": -0.0455075978396452,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2028",
+    "method": "gnn_geo",
+    "field": "did",
+    "actual": 0.05481672227858625,
+    "expected": 0.05481672227858614,
+    "abs_difference": 1.1102230246251565e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2028",
+    "method": "gnn_geo",
+    "field": "lo",
+    "actual": 0.017250959818843607,
+    "expected": 0.0172509598188435,
+    "abs_difference": 1.0755285551056204e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2028",
+    "method": "gnn_geo",
+    "field": "hi",
+    "actual": 0.16583127619174592,
+    "expected": 0.16583127619174592,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2028",
+    "method": "gnn_geo",
+    "field": "p_did_gt0",
+    "actual": 0.997,
+    "expected": 0.997,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2028",
+    "method": "gnn_geo",
+    "field": "spatial_F_minus_E",
+    "actual": 0.03909250675069453,
+    "expected": 0.03909250675069442,
+    "abs_difference": 1.1102230246251565e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2028",
+    "method": "gnn_geo",
+    "field": "random_F_minus_E",
+    "actual": -0.015724215527891716,
+    "expected": -0.015724215527891716,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2029",
+    "method": "drn_lak",
+    "field": "did",
+    "actual": 0.14034450240293728,
+    "expected": 0.14034450240293728,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2029",
+    "method": "drn_lak",
+    "field": "lo",
+    "actual": 0.0352727047549579,
+    "expected": 0.03527270475495801,
+    "abs_difference": 1.1102230246251565e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2029",
+    "method": "drn_lak",
+    "field": "hi",
+    "actual": 0.315202227491019,
+    "expected": 0.315202227491019,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2029",
+    "method": "drn_lak",
+    "field": "p_did_gt0",
+    "actual": 0.9995,
+    "expected": 0.9995,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2029",
+    "method": "drn_lak",
+    "field": "spatial_F_minus_E",
+    "actual": 0.09483690456329208,
+    "expected": 0.09483690456329208,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2029",
+    "method": "drn_lak",
+    "field": "random_F_minus_E",
+    "actual": -0.0455075978396452,
+    "expected": -0.0455075978396452,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2029",
+    "method": "gnn_geo",
+    "field": "did",
+    "actual": 0.051788255286863594,
+    "expected": 0.051788255286863594,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2029",
+    "method": "gnn_geo",
+    "field": "lo",
+    "actual": 0.017155069535686622,
+    "expected": 0.017155069535686622,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2029",
+    "method": "gnn_geo",
+    "field": "hi",
+    "actual": 0.10096188453373386,
+    "expected": 0.10096188453373386,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2029",
+    "method": "gnn_geo",
+    "field": "p_did_gt0",
+    "actual": 0.997,
+    "expected": 0.997,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2029",
+    "method": "gnn_geo",
+    "field": "spatial_F_minus_E",
+    "actual": 0.03606403975897188,
+    "expected": 0.03606403975897188,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km7_s2029",
+    "method": "gnn_geo",
+    "field": "random_F_minus_E",
+    "actual": -0.015724215527891716,
+    "expected": -0.015724215527891716,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km5_s2026",
+    "method": "drn_lak",
+    "field": "did",
+    "actual": 0.14080717246817487,
+    "expected": 0.14080717246817487,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km5_s2026",
+    "method": "drn_lak",
+    "field": "lo",
+    "actual": 0.041675921410252795,
+    "expected": 0.04167592141025279,
+    "abs_difference": 6.938893903907228e-18,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km5_s2026",
+    "method": "drn_lak",
+    "field": "hi",
+    "actual": 0.30338597186300015,
+    "expected": 0.3033859718629999,
+    "abs_difference": 2.220446049250313e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km5_s2026",
+    "method": "drn_lak",
+    "field": "p_did_gt0",
+    "actual": 1.0,
+    "expected": 1.0,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km5_s2026",
+    "method": "drn_lak",
+    "field": "spatial_F_minus_E",
+    "actual": 0.09529957462852967,
+    "expected": 0.09529957462852967,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km5_s2026",
+    "method": "drn_lak",
+    "field": "random_F_minus_E",
+    "actual": -0.0455075978396452,
+    "expected": -0.0455075978396452,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km5_s2026",
+    "method": "gnn_geo",
+    "field": "did",
+    "actual": 0.0988501482657188,
+    "expected": 0.0988501482657188,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km5_s2026",
+    "method": "gnn_geo",
+    "field": "lo",
+    "actual": 0.04367624327341752,
+    "expected": 0.04367624327341731,
+    "abs_difference": 2.0816681711721685e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km5_s2026",
+    "method": "gnn_geo",
+    "field": "hi",
+    "actual": 0.17190182148386332,
+    "expected": 0.17190182148386332,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km5_s2026",
+    "method": "gnn_geo",
+    "field": "p_did_gt0",
+    "actual": 0.9995,
+    "expected": 0.9995,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km5_s2026",
+    "method": "gnn_geo",
+    "field": "spatial_F_minus_E",
+    "actual": 0.08312593273782709,
+    "expected": 0.08312593273782709,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km5_s2026",
+    "method": "gnn_geo",
+    "field": "random_F_minus_E",
+    "actual": -0.015724215527891716,
+    "expected": -0.015724215527891716,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km10_s2026",
+    "method": "drn_lak",
+    "field": "did",
+    "actual": 0.09422129328242612,
+    "expected": 0.09422129328242612,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km10_s2026",
+    "method": "drn_lak",
+    "field": "lo",
+    "actual": 0.028536138526448155,
+    "expected": 0.028536138526448374,
+    "abs_difference": 2.185751579730777e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km10_s2026",
+    "method": "drn_lak",
+    "field": "hi",
+    "actual": 0.1818319479555482,
+    "expected": 0.18183194795554788,
+    "abs_difference": 3.0531133177191805e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km10_s2026",
+    "method": "drn_lak",
+    "field": "p_did_gt0",
+    "actual": 1.0,
+    "expected": 1.0,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km10_s2026",
+    "method": "drn_lak",
+    "field": "spatial_F_minus_E",
+    "actual": 0.048713695442780924,
+    "expected": 0.048713695442780924,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km10_s2026",
+    "method": "drn_lak",
+    "field": "random_F_minus_E",
+    "actual": -0.0455075978396452,
+    "expected": -0.0455075978396452,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km10_s2026",
+    "method": "gnn_geo",
+    "field": "did",
+    "actual": 0.10353180691931818,
+    "expected": 0.10353180691931818,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km10_s2026",
+    "method": "gnn_geo",
+    "field": "lo",
+    "actual": 0.034989676524309274,
+    "expected": 0.034989676524309274,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km10_s2026",
+    "method": "gnn_geo",
+    "field": "hi",
+    "actual": 0.2767632848451888,
+    "expected": 0.2767632848451888,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km10_s2026",
+    "method": "gnn_geo",
+    "field": "p_did_gt0",
+    "actual": 0.9995,
+    "expected": 0.9995,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km10_s2026",
+    "method": "gnn_geo",
+    "field": "spatial_F_minus_E",
+    "actual": 0.08780759139142646,
+    "expected": 0.08780759139142646,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_km10_s2026",
+    "method": "gnn_geo",
+    "field": "random_F_minus_E",
+    "actual": -0.015724215527891716,
+    "expected": -0.015724215527891716,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_loco",
+    "method": "drn_lak",
+    "field": "did",
+    "actual": 0.1012612554498531,
+    "expected": 0.1012612554498531,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_loco",
+    "method": "drn_lak",
+    "field": "lo",
+    "actual": 0.06350987377153094,
+    "expected": 0.06350987377153085,
+    "abs_difference": 9.71445146547012e-17,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_loco",
+    "method": "drn_lak",
+    "field": "hi",
+    "actual": 0.15115670833246206,
+    "expected": 0.15115670833246206,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_loco",
+    "method": "drn_lak",
+    "field": "p_did_gt0",
+    "actual": 1.0,
+    "expected": 1.0,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_loco",
+    "method": "drn_lak",
+    "field": "spatial_F_minus_E",
+    "actual": 0.055753657610207896,
+    "expected": 0.055753657610207896,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_loco",
+    "method": "drn_lak",
+    "field": "random_F_minus_E",
+    "actual": -0.0455075978396452,
+    "expected": -0.0455075978396452,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_loco",
+    "method": "gnn_geo",
+    "field": "did",
+    "actual": 0.13134561841449677,
+    "expected": 0.13134561841449677,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_loco",
+    "method": "gnn_geo",
+    "field": "lo",
+    "actual": 0.0620017093036207,
+    "expected": 0.06200170930362059,
+    "abs_difference": 1.1102230246251565e-16,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_loco",
+    "method": "gnn_geo",
+    "field": "hi",
+    "actual": 0.234356479223199,
+    "expected": 0.234356479223199,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_loco",
+    "method": "gnn_geo",
+    "field": "p_did_gt0",
+    "actual": 1.0,
+    "expected": 1.0,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_loco",
+    "method": "gnn_geo",
+    "field": "spatial_F_minus_E",
+    "actual": 0.11562140288660505,
+    "expected": 0.11562140288660505,
+    "abs_difference": 0.0,
+    "passed": true
+  },
+  {
+    "dataset": "euppbench",
+    "design": "part_loco",
+    "method": "gnn_geo",
+    "field": "random_F_minus_E",
+    "actual": -0.015724215527891716,
+    "expected": -0.015724215527891716,
+    "abs_difference": 0.0,
+    "passed": true
+  }
+]

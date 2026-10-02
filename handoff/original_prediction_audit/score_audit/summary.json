@@ -1,0 +1,27 @@
+{
+  "source_commit": "8858ddbcffb146d82030a2ba126502eb0c4784be",
+  "metadata": [
+    {
+      "dataset": "german",
+      "rows": 182218,
+      "all_arrays_match_checkout": true
+    },
+    {
+      "dataset": "euppbench",
+      "rows": 423090,
+      "all_arrays_match_checkout": true
+    }
+  ],
+  "checks": 1986,
+  "failures": [],
+  "score_metric_checks": 396,
+  "single_seed_checks": 272,
+  "seen_score_checks": 18,
+  "daily_comparisons": 64,
+  "stage23_comparisons": 60,
+  "max_score_difference": 2.220446049250313e-16,
+  "scope": "Original main/calibration/seen scores and Stage-4 descriptive/pilot daily tests; independent outputs only.",
+  "seen_score_tolerance": 5.1e-06,
+  "seen_tolerance_reason": "These reference values are copied from original summary CSVs formatted to five decimals. Computed values unchanged; only the comparison tolerance is corrected.",
+  "max_seen_difference": 4.930738186970096e-06
+}

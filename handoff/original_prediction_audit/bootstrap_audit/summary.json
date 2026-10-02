@@ -1,0 +1,12 @@
+{
+  "source_commit": "8858ddbcffb146d82030a2ba126502eb0c4784be",
+  "replicates": 2000,
+  "core_models": [
+    "drn_lak",
+    "gnn_geo"
+  ],
+  "checks": 112,
+  "max_abs_difference": 3.0531133177191805e-16,
+  "failures": [],
+  "scope": "Primary DRN/GNN coupled seed/station DiD and all six additional EUPPBench partitions; not every auxiliary pair/ranking or fold bootstrap."
+}
